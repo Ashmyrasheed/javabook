@@ -53,8 +53,32 @@ public class Book {
                         System.out.println(e);
                     }
                     break;
-            case 2:
-                System.out.println("select data");
+                case 2:
+                    System.out.println("select data");
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarydb","root","");
+                        String sql = "SELECT `id`, `title`, `author`, `category`, `charge per day` FROM `books` ";
+                        Statement stmt = con.createStatement();
+                        ResultSet rs= stmt.executeQuery(sql);
+                        while (rs.next()){
+                            String getbookname=rs.getString("title");
+                            String getauthor=rs.getString("author");
+                            String getcategory=rs.getString("category");
+                            String getbookchargeperday=rs.getString("charge per day");
+
+                            System.out.println("title="+getbookname);
+                            System.out.println("author="+getauthor);
+                            System.out.println("category="+getcategory);
+                            System.out.println("charge per day="+getbookchargeperday);
+
+                        }
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
+                    break;
 
                 break;
             case 3:
